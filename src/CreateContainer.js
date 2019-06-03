@@ -11,7 +11,7 @@ class CreateContainer extends PureComponent {
         this.state = {
             data: [{
                 Id: 0,
-                Owner: "Rory",
+                Owner: "Bob",
                 Task: "Get Food",
                 Icon: "",
                 Items: null,

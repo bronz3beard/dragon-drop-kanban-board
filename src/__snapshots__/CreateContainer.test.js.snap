@@ -69,3 +69,73 @@ exports[`CreateContainer Component renders without crashing in 'debug' mode Mon 
   />
 </div>
 `;
+
+exports[`CreateContainer Component renders without crashing in 'debug' mode Mon Jun 03 2019 20:59:11 GMT+1000 (Australian Eastern Standard Time) 1`] = `
+<div
+  className="container"
+>
+  <ToDo
+    data={
+      Array [
+        <div
+          className="draggable"
+          draggable={true}
+          onDragStart={[Function]}
+        >
+          <div>
+            <span>
+              Jhon Doe
+               - 
+            </span>
+            Find a Friend
+          </div>
+        </div>,
+        <div
+          className="draggable"
+          draggable={true}
+          onDragStart={[Function]}
+        >
+          <div>
+            <span>
+              Billy
+               - 
+            </span>
+            Buy Pet Food
+          </div>
+        </div>,
+      ]
+    }
+    handleTaskSubmit={[Function]}
+    onDragOver={[Function]}
+    onDrop={[Function]}
+  />
+  <Doing
+    data={
+      Array [
+        <div
+          className="draggable"
+          draggable={true}
+          onDragStart={[Function]}
+        >
+          <div>
+            <span>
+              Bob
+               - 
+            </span>
+            Get Food
+          </div>
+        </div>,
+      ]
+    }
+    handleTaskSubmit={[Function]}
+    onDragOver={[Function]}
+    onDrop={[Function]}
+  />
+  <Complete
+    data={Array []}
+    handleTaskSubmit={[Function]}
+    onDragOver={[Function]}
+    onDrop={[Function]}
+  />
+</div>
+`;
