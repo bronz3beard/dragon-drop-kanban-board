@@ -7,7 +7,7 @@ This project was bootstrapped with [create-react-app](https://github.com/faceboo
 - __For__ Anyone looking to organise daily tasks,
 - __who__ needs to arrange tasks in a way that can identify what needs to be done next,
 - __the__ Drogon drop kanban board,
-- __is a__ a common method for organising daily tasks.
+- __is a__ common method for organising daily tasks.
 
 
 # Installation:
