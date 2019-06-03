@@ -27,5 +27,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.2",
+    "enzyme-to-json": "^3.3.5"
+  },
+  "author": {
+    "name": "Rory Fairweather-Neylan",
+    "email": "info2rory@gmail.com",
+    "license": "ISC"
   }
 }

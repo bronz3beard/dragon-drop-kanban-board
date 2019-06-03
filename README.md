@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Drogon drop kanban board
+
+### This document serves as a consolidation of some of the items that could be helpful to understand this project.
+
+This project was bootstrapped with [create-react-app](https://github.com/facebook/create-react-app).
+
+- __For__ Anyone looking to organise daily tasks,
+- __who__ needs to arrange tasks in a way that can identify what needs to be done next,
+- __the__ Drogon drop kanban board,
+- __is a__ a common method for organising daily tasks.
+
+
+# Installation:
+
+# Demo:
+* a short demo for the current version of the [DRAGON-DROP-KANBAN-BOARD 0.1.0](https://codepen.io/roryfn/pen/GeeONq).
+
+# Collaborators:
+- @personA
+- @personB
+
 
 ## Available Scripts
 
