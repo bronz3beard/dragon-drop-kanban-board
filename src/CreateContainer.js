@@ -1,153 +1,124 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
+import Airtable from "airtable";
 
 //Components
+import NavBar from "./Components/nav";
 import ToDo from "./Components/todo";
 import Doing from "./Components/doing";
 import Complete from "./Components/complete";
 
+const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
+const AIRTABLE_BASE = process.env.REACT_APP_BASE;
+const AIRTABLE_TABLE = process.env.REACT_APP_TABLE;
+
 class CreateContainer extends PureComponent {
-    constructor(props) {
-        super(props); // super passes the props into the React.Component
-        this.state = {
-            data: [{
-                Id: 0,
-                Owner: "Bob",
-                Task: "Get Food",
-                Icon: "",
-                Items: null,
-                IsContainer: true,
-                Collapse: true,
-                Status: "Doing",
-                NewStatus: null,
-            }, {
-                Id: 2,
-                Owner: "Jhon Doe",
-                Task: "Find a Friend",
-                Icon: "",
-                Items: null,
-                IsContainer: false,
-                Collapse: true,
-                Status: "ToDo",
-                NewStatus: null,
-            }, {
-                Id: 3,
-                Owner: "Billy",
-                Task: "Buy Pet Food",
-                Icon: "",
-                Items: null,
-                IsContainer: true,
-                Collapse: true,
-                Status: "ToDo",
-                NewStatus: null,
-            }],
-        };
+    state = {
+        data: [],
+    };
+    componentDidMount() {
+        this.getAirTableTasks();
     }
-
-    handleTaskSubmit = (task) => {
-        const tasks = this.state.data;
-        task.Id = tasks.length + 1;
-
-        const newTasks = tasks.concat([task]);
-        this.setState({
-            data: newTasks
+    getAirTableTasks = () => {
+        const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE);
+        base(AIRTABLE_TABLE).select({
+            view: 'Grid view'
+        }).firstPage((err, records) => {
+            if (err) { console.error(err); return; }
+            this.setState({
+                data: records,
+            })
         });
-
-        const data = new FormData();
-        data.append('Owner', task.Owner);
-        data.append('Task', task.Task);
-        data.append('Status', task.Status);
-
-        const xmlhr = new XMLHttpRequest();
-        xmlhr.open("POST", this.props.submitUrl, true);
-        xmlhr.onload = () => this.loadTasksFromServer();
-        xmlhr.send(data);
     }
-    handleNewCardSubmit = (addStatus) => {
-        const tasks = this.state.data;
-        addStatus.Id = tasks.length + 1;
-
-        const newStatus = tasks.concat([addStatus]);
-        this.setState({
-            data: newStatus,
+    updateAirTable = (id, status) => {
+        const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE);
+        base(AIRTABLE_TABLE).update(id, {
+            "Status": status,
+          }, function(err) {
+            if (err) {
+              alert(err);
+              return;
+            }
         });
-
-        const data = new FormData();
-        data.append('Status', addStatus.Status);
-
-        const xmlhr = new XMLHttpRequest();
-        xmlhr.open("POST", this.props.submitUrl, true);
-        xmlhr.onload = () => this.loadTasksFromServer();
-        xmlhr.send(data);
     }
-    handleDragStart = (event, Id) => {
-        console.log("dragstart: ", Id);
-        event.dataTransfer.setData("Id", Id)
+    handleDragStart = (event, id) => {
+        console.log("dragstart: ", id);
+        event.dataTransfer.setData("id", id)        
     }
     handleDragOver = (event) => {
         event.preventDefault();
     }
     handleDrop = (event, status) => {
-        let Id = event.dataTransfer.getData("Id");
-
-        let Status = this.state.data.filter((task) => {
-            if (task.Id == Id) {
-                task.Status = status;
+        let id = event.dataTransfer.getData("id");
+        //const idNumber = Number(id);
+        let updateStatus = this.state.data.filter((task) => {
+            if (task.id === id) {
+                task.fields.Status = status;
             }
-            console.log(task.Status, " ", task.Owner);
+            console.log(task.fields.Status, " ", task.fields["Task Owner"]);
             return task;
         });
 
         this.setState({
             ...this.state.data,
-            Status
+            updateStatus
         });
-        console.log(Status);
+        this.updateAirTable(id, status);
     }
-    render() {
+    getDateTimeNow = (dateTime) => {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateTime).toLocaleTimeString([], options);
+    }
 
-        var status = {
+    render() {
+        const { data } = this.state;
+
+        console.log("TCL: CreateContainer -> render -> data ", data )
+        var taskStatusList = {
             ToDo: [],
             Doing: [],
             Complete: [],
         };
-        { console.log(status, " ") }
 
-        this.state.data.map((type) => {
-            status[type.Status].push(
+        data.map((type) => {
+            taskStatusList[type.fields.Status].push(
                 <div
-                    key={type.Id}
+                    key={type.id}
                     draggable
-                    onDragStart={(event) => this.handleDragStart(event, type.Id)}
+                    onDragStart={(event) => this.handleDragStart(event, type.id)}
                     className="draggable"
                 >
-                    <div>
-                        <span>{type.Owner} - </span>
-                        {type.Task}
+                    <div className={type.fields.Status}>
+                        <div className="owner">{type.fields["Task Owner"] + " - " + this.getDateTimeNow(type.fields["Time Stamp"])}</div>
+                        {true ? "" : <div>{type.fields.Email}</div>}
+                        <span className="task"><p>{type.fields.Task}</p></span>
                     </div>
                 </div>
             );
         })
-
         return (
-            <div className="container">
-                <ToDo
-                    data={status.ToDo}
-                    onDragOver={(event) => this.handleDragOver(event)}
-                    onDrop={(event) => this.handleDrop(event, "ToDo")}
-                    handleTaskSubmit={this.handleTaskSubmit} />
-                <Doing
-                    data={status.Doing}
-                    onDragOver={(event) => this.handleDragOver(event)}
-                    onDrop={(event) => this.handleDrop(event, "Doing")}
-                    handleTaskSubmit={this.handleTaskSubmit} />
-                <Complete
-                    data={status.Complete}
-                    onDragOver={(event) => this.handleDragOver(event)}
-                    onDrop={(event) => this.handleDrop(event, "Complete")}
-                    handleTaskSubmit={this.handleTaskSubmit} />
-            </div>
+            <Fragment>
+                <NavBar />
+                <div className="container">
+                    <ToDo
+                        data={taskStatusList.ToDo}
+                        onDragOver={(event) => this.handleDragOver(event)}
+                        onDrop={(event) => this.handleDrop(event, "ToDo")}
+                        handleTaskSubmit={this.handleTaskSubmit} />
+                    <Doing
+                        data={taskStatusList.Doing}
+                        onDragOver={(event) => this.handleDragOver(event)}
+                        onDrop={(event) => this.handleDrop(event, "Doing")}
+                        handleTaskSubmit={this.handleTaskSubmit} />
+                    <Complete
+                        data={taskStatusList.Complete}
+                        onDragOver={(event) => this.handleDragOver(event)}
+                        onDrop={(event) => this.handleDrop(event, "Complete")}
+                        handleTaskSubmit={this.handleTaskSubmit} />
+                </div>
+            </Fragment>
         )
     }
 }
+
 
 export default CreateContainer;

@@ -11,9 +11,12 @@ This project was bootstrapped with [create-react-app](https://github.com/faceboo
 
 
 # Installation:
+- clone
+- npm install
+- create airtable account: [Airtable](https://airtable.com/)
 
 # Demo:
-* a short demo for the current version of the [DRAGON-DROP-KANBAN-BOARD 0.1.0](https://codepen.io/roryfn/pen/GeeONq).
+* a short demo for the current version of the [DRAGON-DROP-KANBAN-BOARD 0.2.0](https://codepen.io/roryfn/pen/GeeONq).
 
 # Collaborators:
 - @personA

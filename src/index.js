@@ -5,6 +5,7 @@ import CreateContainer from './CreateContainer';
 import * as serviceWorker from './serviceWorker';
 
 import "./Styles/drogondrop.css";
+import "./Styles/navi.css";
 
 ReactDOM.render(
 <CreateContainer

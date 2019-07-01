@@ -11,11 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - __Fixed__ for any bug fixes.
 - __Security__ in case of vulnerabilities.
 
-## [0.1.0] - 03-06-2019
-###Changed
-- 
+## [0.2.0] - 01-07-2019
+###Added
+- [Airtable](https://airtable.com/) to save and manage taks
+- WIP css changes
+- navbar
+- .env and env.example
+- new font from google
+- functions to list, update and create tasks
 
-### Added
+## [0.1.0] - 03-06-2019
+###Added
 - Ability to test components
 - CSS
 - README
