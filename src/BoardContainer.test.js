@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { configure, mount, shallow, render } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import CreateContainer from './CreateContainer';
+import BoardContainer from './BoardContainer';
 
 configure({ adapter: new Adapter() });
 
 describe("CreateContainer Component", () => {
   it("renders without crashing in 'debug' mode " + new Date(), () => {
-    const component = shallow(<CreateContainer debug />);
+    const component = shallow(<BoardContainer debug />);
     expect(component).toMatchSnapshot();
     component.unmount();
   });

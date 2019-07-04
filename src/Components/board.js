@@ -2,25 +2,35 @@ import React, { PureComponent, Fragment } from "react";
 import Airtable from "airtable";
 
 //Components
-import NavBar from "./Components/nav";
-import ToDo from "./Components/todo";
-import Doing from "./Components/doing";
-import Complete from "./Components/complete";
+import ToDo from "./todo";
+import Doing from "./doing";
+import Complete from "./complete";
 
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
 const AIRTABLE_TABLE = process.env.REACT_APP_TABLE;
+const AIRTABLE_TABLE_TWO = process.env.REACT_APP_TABLE_TWO;
 
-class CreateContainer extends PureComponent {
+class Board extends PureComponent {
     state = {
         data: [],
     };
     componentDidMount() {
+        const currentUrl = this.getUrl();
+        console.log("TCL: TaskForm -> componentDidMount -> currentUrl", currentUrl)
         this.getAirTableTasks();
     }
+    getUrl = () => {
+        const currentURL = window.location.pathname.split('/')[2];
+        //console.log("TCL: App -> getUrl -> currentURL", currentURL)
+        return `/${currentURL}`;
+    }
     getAirTableTasks = () => {
+        const currentUrl = this.getUrl();
+        const Table = currentUrl === "/board-1" ? AIRTABLE_TABLE : AIRTABLE_TABLE_TWO;
+
         const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE);
-        base(AIRTABLE_TABLE).select({
+        base(Table).select({
             view: 'Grid view'
         }).firstPage((err, records) => {
             if (err) { console.error(err); return; }
@@ -30,8 +40,11 @@ class CreateContainer extends PureComponent {
         });
     }
     updateAirTable = (id, status) => {
+        const currentUrl = this.getUrl();
+        const Table = currentUrl === "/board-1" ? AIRTABLE_TABLE : AIRTABLE_TABLE_TWO;
+        
         const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_BASE);
-        base(AIRTABLE_TABLE).update(id, {
+        base(Table).update(id, {
             "Status": status,
           }, function(err) {
             if (err) {
@@ -40,14 +53,13 @@ class CreateContainer extends PureComponent {
             }
         });
     }
-    handleDragStart = (event, id) => {
-        console.log("dragstart: ", id);
+    handleDragStart = (id, event) => {
         event.dataTransfer.setData("id", id)        
     }
     handleDragOver = (event) => {
         event.preventDefault();
     }
-    handleDrop = (event, status) => {
+    handleDrop = (status, event) => {
         let id = event.dataTransfer.getData("id");
         //const idNumber = Number(id);
         let updateStatus = this.state.data.filter((task) => {
@@ -72,7 +84,6 @@ class CreateContainer extends PureComponent {
     render() {
         const { data } = this.state;
 
-        console.log("TCL: CreateContainer -> render -> data ", data )
         var taskStatusList = {
             ToDo: [],
             Doing: [],
@@ -84,7 +95,7 @@ class CreateContainer extends PureComponent {
                 <div
                     key={type.id}
                     draggable
-                    onDragStart={(event) => this.handleDragStart(event, type.id)}
+                    onDragStart={(event) => this.handleDragStart(type.id, event)}
                     className="draggable"
                 >
                     <div className={type.fields.Status}>
@@ -95,30 +106,41 @@ class CreateContainer extends PureComponent {
                 </div>
             );
         })
+
         return (
-            <Fragment>
-                <NavBar />
-                <div className="container">
-                    <ToDo
-                        data={taskStatusList.ToDo}
-                        onDragOver={(event) => this.handleDragOver(event)}
-                        onDrop={(event) => this.handleDrop(event, "ToDo")}
-                        handleTaskSubmit={this.handleTaskSubmit} />
-                    <Doing
-                        data={taskStatusList.Doing}
-                        onDragOver={(event) => this.handleDragOver(event)}
-                        onDrop={(event) => this.handleDrop(event, "Doing")}
-                        handleTaskSubmit={this.handleTaskSubmit} />
-                    <Complete
-                        data={taskStatusList.Complete}
-                        onDragOver={(event) => this.handleDragOver(event)}
-                        onDrop={(event) => this.handleDrop(event, "Complete")}
-                        handleTaskSubmit={this.handleTaskSubmit} />
-                </div>
-            </Fragment>
-        )
+        <div className="container">
+            <ToDo
+                data={taskStatusList.ToDo}
+                onDragOver={(event) => this.handleDragOver(event)}
+                onDrop={(event) => this.handleDrop("ToDo", event)}
+            />
+            <Doing
+                data={taskStatusList.Doing}
+                onDragOver={(event) => this.handleDragOver(event)}
+                onDrop={(event) => this.handleDrop("Doing", event)}
+            />
+            <Complete
+                data={taskStatusList.Complete}
+                onDragOver={(event) => this.handleDragOver(event)}
+                onDrop={(event) => this.handleDrop("Complete", event)}
+            />
+        </div>
+        );
     }
 }
+    
+export default Board;
 
 
-export default CreateContainer;
+
+
+
+
+
+
+
+
+
+
+
+

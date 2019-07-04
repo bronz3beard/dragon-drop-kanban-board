@@ -3,6 +3,7 @@ import React, { PureComponent } from "react";
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
 const AIRTABLE_TABLE = process.env.REACT_APP_TABLE;
+const AIRTABLE_TABLE_TWO = process.env.REACT_APP_TABLE_TWO;
 
 class TaskForm extends PureComponent {
     constructor(props) {
@@ -24,10 +25,21 @@ class TaskForm extends PureComponent {
             addTask: false,
         };
     }
+    componentDidMount() {
+        const currentUrl = this.getUrl();
+        console.log("TCL: TaskForm -> componentDidMount -> currentUrl", currentUrl)
+    }
+    getUrl = () => {
+        const currentURL = window.location.pathname.split('/')[2];
+        //console.log("TCL: App -> getUrl -> currentURL", currentURL)
+        return `/${currentURL}`;
+    }
     postToAirTable = () => {
         const { formControls } = this.state;
+        const currentUrl = this.getUrl();
+        const Table = currentUrl === "/board-1" ? AIRTABLE_TABLE : AIRTABLE_TABLE_TWO;
         //const base = new Airtable({ apiKey: REACT_APP_API_KEY }).base('appuhJdBl6QlAoRLl');
-        const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
+        const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${Table}`;
         const fields = {
             "fields": {
                 "Task Owner": formControls.taskOwner.value,

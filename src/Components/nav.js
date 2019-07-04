@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 class NavBar extends PureComponent {
     render() {
@@ -11,12 +12,12 @@ class NavBar extends PureComponent {
                     <div className="dropdown">
                     <button className="dropbtn">Boards</button>
                         <div className="dropdown-content">
-                            <a href="/">Board 2</a>
-                            <a href="/">Board 3</a>
-                            <a href="/">Board 4</a>
+                            <Link to="/board/board-1">Board 1</Link>
+                            <Link to="/board/board-2">Board 2</Link>
                         </div>
                     </div>
                 </div>
+                <Link to="/landing" className="home">home</Link>
             </Fragment>
         );
     }

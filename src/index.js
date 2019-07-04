@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import CreateContainer from './CreateContainer';
+import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
+//Components
+import BoardContainer from './BoardContainer';
+//Styles
 import "./Styles/drogondrop.css";
 import "./Styles/navi.css";
+import "./Styles/landing.css"
 
 ReactDOM.render(
-<CreateContainer
-    url="/comments"
-    submitUrl="/comments/new"/>, 
+    <BrowserRouter>
+        <BoardContainer />
+    </BrowserRouter>, 
     document.getElementById('root')
 );
 
