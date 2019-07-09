@@ -28,7 +28,7 @@ body {
 }
 .todo-task-header {
     display: inline-block;
-    width: var(--taskContainerWidth - 1);
+    width: 275px;
     text-align: left;
     margin-top: 3%;
     margin-left: 3%;
@@ -62,7 +62,7 @@ body {
 }
 .doing-task-header {
     display: inline-block;
-    width: var(--taskContainerWidth - 1);
+    width: 275px;
     text-align: left;
     margin-top: 3%;
     margin-left: 3%;
@@ -85,7 +85,7 @@ body {
 }
 .complete-task-header {
     display: inline-block;
-    width: var(--taskContainerWidth - 1);
+    width: 275px;
     text-align: left;
     margin-top: 3%;
     margin-left: 3%;
@@ -125,7 +125,7 @@ input[type=text] {
     padding: 1%;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-}input[type=text]:focus {
+} input[type=text]:focus {
     width: 80%;
 }
 .task-textarea {
