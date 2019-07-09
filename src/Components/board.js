@@ -22,7 +22,7 @@ class Board extends PureComponent {
         base(AIRTABLE_TABLE_TASKS).select({
             view: 'Grid view'
         }).firstPage((err, records) => {
-            if (err) { console.error(err); return; }
+            if (err) { alert(err); return; }
             this.setState({
                 boardData: records,
             })
@@ -52,7 +52,6 @@ class Board extends PureComponent {
             if (task.id === id) {
                 task.fields.Status = status;
             }
-            //console.log(status, " ", id);
             return task;
         });
 

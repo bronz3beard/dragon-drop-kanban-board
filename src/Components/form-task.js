@@ -24,15 +24,8 @@ class TaskForm extends PureComponent {
             addTask: false,
         };
     }
-    componentDidMount() {
-        const currentUrl = this.getUrl();
-        console.log("TCL: TaskForm -> componentDidMount -> currentUrl", currentUrl)
-        
-        //console.log("TCL: TaskForm -> componentDidMount -> this.props.defaultFormData", this.props.defaultFormData)
-    }
     getUrl = () => {
         const currentURL = window.location.pathname.split('-')[1];
-        //console.log("TCL: App -> getUrl -> currentURL", currentURL)
         return currentURL;
     }
     createTaskToAirTable = () => {

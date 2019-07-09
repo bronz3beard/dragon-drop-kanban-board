@@ -6,7 +6,6 @@ import TaskForm from "./form-task";
 class ToDo extends PureComponent {
     render() {
         const { data, defaultFormData, onDragOver, onDrop, handleTaskSubmit } = this.props;
-        console.log("TCL: ToDo -> render -> defaultFormData", defaultFormData)
 
         return (
             <div className="task-list-wrapper">

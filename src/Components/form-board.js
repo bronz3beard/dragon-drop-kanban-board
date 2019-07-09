@@ -27,7 +27,7 @@ class BoardForm extends PureComponent {
         base(AIRTABLE_TABLE_BOARDS).select({
             view: 'Grid view'
         }).firstPage((err, records) => {
-            if (err) { console.error(err); return; }
+            if (err) { alert(err); return; }
             this.setState({
                 existingTableData: records.length,
             });
@@ -49,7 +49,6 @@ class BoardForm extends PureComponent {
             return;
           }
           window.location.reload();
-          console.log(record.getId());
         });
         /*const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_BOARDS}`;
         const fields = {
