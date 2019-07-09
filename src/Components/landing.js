@@ -18,9 +18,7 @@ class Landing extends PureComponent {
         });
     }
     render() {
-        const { hover } = this.state;
         const { boards } = this.props;
-        console.log("TCL: Landing -> render -> boards", boards)
 
         /*const bgImage = `${this.props.landingImage}?h=1200&fm=jpg&q=80`;
         <div style={bgimg1}></div>
