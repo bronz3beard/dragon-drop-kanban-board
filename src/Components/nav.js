@@ -17,7 +17,7 @@ class NavBar extends PureComponent {
                         </div>
                     </div>
                 </div>
-                <Link to="/landing" className="home">home</Link>
+                <Link to="/boards" className="home">home</Link>
             </Fragment>
         );
     }

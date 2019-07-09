@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { StrictMode } from "react";
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
 //Components
 import BoardContainer from './BoardContainer';
+
 //Styles
 import "./Styles/drogondrop.css";
 import "./Styles/navi.css";
 import "./Styles/landing.css"
 
 ReactDOM.render(
-    <BrowserRouter>
-        <BoardContainer />
-    </BrowserRouter>, 
+    <StrictMode>
+        <BrowserRouter>
+            <BoardContainer />
+        </BrowserRouter>
+    </StrictMode>, 
     document.getElementById('root')
 );
 

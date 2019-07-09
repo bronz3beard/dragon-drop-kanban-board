@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 
 //Components
-import TaskForm from "./task-form";
+import TaskForm from "./form-task";
 
 class Doing extends PureComponent {
     render() {
         const { data, onDragOver, onDrop, handleTaskSubmit } = this.props;
+
         return (
             <div className="task-list-wrapper">
                 <div className="doing-column" onDrop={onDrop} onDragOver={onDragOver}>

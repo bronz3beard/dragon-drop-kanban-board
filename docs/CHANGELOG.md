@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - __Fixed__ for any bug fixes.
 - __Security__ in case of vulnerabilities.
 
+## [0.4.0] - 09-07-2019
+###Added
+- ability to add new boards and tasks 
+- form-board component
+- main-routes for all dynamic page routes
+
+###Changed
+- taks-form component naming
+- moved state around for adding boards and adding tasks
+- Major WIP CSS styling changes made throughout
+
 ## [0.3.0] - 04-07-2019
 ###Added
 - another board reusing the same component 

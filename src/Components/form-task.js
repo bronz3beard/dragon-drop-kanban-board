@@ -2,8 +2,7 @@ import React, { PureComponent } from "react";
 
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
-const AIRTABLE_TABLE = process.env.REACT_APP_TABLE;
-const AIRTABLE_TABLE_TWO = process.env.REACT_APP_TABLE_TWO;
+const AIRTABLE_TABLE_TASKS = process.env.REACT_APP_TABLE_TASKS;
 
 class TaskForm extends PureComponent {
     constructor(props) {
@@ -28,23 +27,27 @@ class TaskForm extends PureComponent {
     componentDidMount() {
         const currentUrl = this.getUrl();
         console.log("TCL: TaskForm -> componentDidMount -> currentUrl", currentUrl)
+        
+        //console.log("TCL: TaskForm -> componentDidMount -> this.props.defaultFormData", this.props.defaultFormData)
     }
     getUrl = () => {
-        const currentURL = window.location.pathname.split('/')[2];
+        const currentURL = window.location.pathname.split('-')[1];
         //console.log("TCL: App -> getUrl -> currentURL", currentURL)
-        return `/${currentURL}`;
+        return currentURL;
     }
-    postToAirTable = () => {
+    createTaskToAirTable = () => {
         const { formControls } = this.state;
         const currentUrl = this.getUrl();
-        const Table = currentUrl === "/board-1" ? AIRTABLE_TABLE : AIRTABLE_TABLE_TWO;
+        const boardIdNumber = Number(currentUrl);
         //const base = new Airtable({ apiKey: REACT_APP_API_KEY }).base('appuhJdBl6QlAoRLl');
-        const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${Table}`;
+        const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_TASKS}`;
         const fields = {
             "fields": {
                 "Task Owner": formControls.taskOwner.value,
                 "Task": formControls.task.value,
                 "Status": formControls.status.value,
+                "BoardId": boardIdNumber,
+                "Url": `board-${boardIdNumber}`,
             }
         }
         fetch(url, {
@@ -66,12 +69,12 @@ class TaskForm extends PureComponent {
         const task = formControls.task.value.trim();
 
         if (!task || !owner) {
-            return alert("Please add a task along with an owner");;
+            return alert("Please add a task along with an owner");
         }
         this.setState({
             addTask: false,
         });
-        this.postToAirTable();        
+        this.createTaskToAirTable();        
     }
     changeHandler = (event) => {
         const { formControls } = this.state;
