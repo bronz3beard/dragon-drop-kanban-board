@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateContainer Component renders without crashing in 'debug' mode Tue Jul 09 2019 21:41:18 GMT+1000 (Australian Eastern Standard Time) 1`] = `
+<Fragment>
+  <NavBar />
+  <Switch>
+    <Route
+      exact={true}
+      path="/boards"
+      render={[Function]}
+    />
+    <BoardRoutes
+      boards={Array []}
+    />
+  </Switch>
+</Fragment>
+`;
