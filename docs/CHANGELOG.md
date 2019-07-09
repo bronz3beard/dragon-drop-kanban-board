@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ability to add new boards and tasks 
 - form-board component
 - main-routes for all dynamic page routes
+- added to [Heroku](https://www.heroku.com/) for hosting
 
 ###Changed
 - taks-form component naming
