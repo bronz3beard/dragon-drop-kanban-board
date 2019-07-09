@@ -1,6 +1,9 @@
 {
   "name": "dragon-drop-kanban-board",
   "version": "0.4.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "private": true,
   "dependencies": {
     "airtable": "^0.6.0",
