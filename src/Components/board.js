@@ -1,4 +1,5 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
+import { Link } from "react-router-dom";
 import Airtable from "airtable";
 
 //Components
@@ -83,9 +84,9 @@ class Board extends PureComponent {
                         key={type.id}
                         draggable
                         onDragStart={(event) => this.handleDragStart(type.id, event)}
-                        className="draggable"
+                        className="task-card "
                     >
-                        <div className={type.fields.Status}>
+                        <div className="text">
                             <div className="owner">{type.fields["Task Owner"] + " - " + this.getDateTimeNow(type.fields["Time Stamp"])}</div>
                             {true ? "" : <div>{type.fields.Email}</div>}
                             <span className="task"><p>{type.fields.Task}</p></span>
@@ -96,26 +97,29 @@ class Board extends PureComponent {
         })
 
         return (
-        <div className="container">
-            <ToDo
-                data={taskStatusList.ToDo}
-                onDragOver={(event) => this.handleDragOver(event)}
-                onDrop={(event) => this.handleDrop("ToDo", event)}
-                defaultFormData={boardData}
-            />
-            <Doing
-                data={taskStatusList.Doing}
-                onDragOver={(event) => this.handleDragOver(event)}
-                onDrop={(event) => this.handleDrop("Doing", event)}
-                defaultFormData={boardData}
-            />
-            <Complete
-                data={taskStatusList.Complete}
-                onDragOver={(event) => this.handleDragOver(event)}
-                onDrop={(event) => this.handleDrop("Complete", event)}
-                defaultFormData={boardData}
-            />
-        </div>
+        <Fragment>
+            <Link to="/boards" className="home">home</Link>
+            <div className="container">
+                <ToDo
+                    data={taskStatusList.ToDo}
+                    onDragOver={(event) => this.handleDragOver(event)}
+                    onDrop={(event) => this.handleDrop("ToDo", event)}
+                    defaultFormData={boardData}
+                />
+                <Doing
+                    data={taskStatusList.Doing}
+                    onDragOver={(event) => this.handleDragOver(event)}
+                    onDrop={(event) => this.handleDrop("Doing", event)}
+                    defaultFormData={boardData}
+                />
+                <Complete
+                    data={taskStatusList.Complete}
+                    onDragOver={(event) => this.handleDragOver(event)}
+                    onDrop={(event) => this.handleDrop("Complete", event)}
+                    defaultFormData={boardData}
+                />
+            </div>
+        </Fragment>
         );
     }
 }

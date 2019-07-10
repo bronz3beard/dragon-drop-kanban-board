@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - __Fixed__ for any bug fixes.
 - __Security__ in case of vulnerabilities.
 
+## [0.4.1] - 10-07-2019
+###Added
+- WIP More css styling added more adjustments to come
+
 ## [0.4.0] - 09-07-2019
 ###Added
 - ability to add new boards and tasks 

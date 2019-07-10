@@ -9,10 +9,12 @@ class Complete extends PureComponent {
 
         return (
             <div className="task-list-wrapper">
-                <div className="complete-column" onDrop={onDrop} onDragOver={onDragOver}>
-                    <span className="complete-task-header">Complete</span>
+                <div className="grid-task" onDrop={onDrop} onDragOver={onDragOver}>
+                    <span className="task-header">
+                        <TaskForm status="Complete" handleTaskSubmit={handleTaskSubmit} />
+                        Complete
+                    </span>
                     {data}
-                    <TaskForm status="Complete" handleTaskSubmit={handleTaskSubmit} />
                 </div>
             </div>
         );

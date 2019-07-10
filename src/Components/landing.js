@@ -11,7 +11,7 @@ class Landing extends PureComponent {
     componentDidMount() {
         document.addEventListener("mouseenter", this.handleMouseOver);
     }
-    handleMouseOver =() => {
+    handleMouseOver = () => {
         const { hover } = this.state;
         this.setState({
             hover: !hover,
@@ -46,7 +46,9 @@ class Landing extends PureComponent {
         return (
             <Fragment>
                 <BoardForm />
-                {BoardType}
+                <div className="card-container ">
+                    {BoardType}
+                </div>
             </Fragment>
         );
     }

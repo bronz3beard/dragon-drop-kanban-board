@@ -105,7 +105,6 @@ class TaskForm extends PureComponent {
                         onChange={this.changeHandler} />
                 </div>
                 <textarea
-                    className="task-textarea"
                     type="input"
                     name="task"
                     placeholder={formControls.task.placeholder}

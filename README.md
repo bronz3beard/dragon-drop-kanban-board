@@ -17,7 +17,7 @@ This project was bootstrapped with [create-react-app](https://github.com/faceboo
 - [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 
 # Demo:
-* a basic demo for the current version of the [DRAGON-DROP-KANBAN-BOARD 0.4.0](https://dragon-drop-kanban-board.herokuapp.com/boards).
+* a basic demo for the current version of the [DRAGON-DROP-KANBAN-BOARD 0.4.1](https://dragon-drop-kanban-board.herokuapp.com/boards).
 
 # Collaborators:
 - @personA

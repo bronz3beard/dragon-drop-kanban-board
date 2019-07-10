@@ -7,9 +7,10 @@ import * as serviceWorker from './serviceWorker';
 import BoardContainer from './BoardContainer';
 
 //Styles
-import "./Styles/drogondrop.css";
 import "./Styles/navi.css";
 import "./Styles/landing.css"
+import "./Styles/drogondrop.css";
+import "./Styles/form.css";
 
 ReactDOM.render(
     <StrictMode>

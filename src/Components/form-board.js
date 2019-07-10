@@ -107,7 +107,7 @@ class BoardForm extends PureComponent {
         const { formControls, addTask } = this.state;
 
         const taskForm = addTask ?
-            <form className="taskForm" onSubmit={this.handleSubmit}>
+            <form className="boardForm" onSubmit={this.handleSubmit}>
                 <div>
                     <input
                         type="text"
@@ -121,7 +121,7 @@ class BoardForm extends PureComponent {
 
         return (
             <React.Fragment>
-                <button className="add-task" onClick={this.handleAddTask}>Add Board</button>
+                <button className="add-board" onClick={this.handleAddTask}>Add Board</button>
                 {taskForm}
             </React.Fragment>
         );

@@ -48,7 +48,7 @@ class BoardContainer extends PureComponent {
 
         return (
             <Fragment>
-                <NavBar />
+                <NavBar boards={boards} />
                 <Switch>
                     <Route exact path="/boards" render={props => (<Landing {...props} boards={boards} />)} />
                     <BoardRoutes boards={boards} />

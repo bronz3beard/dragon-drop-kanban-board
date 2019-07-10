@@ -1,7 +1,27 @@
-.header {
+.nav-header {
     font-family: 'PT Sans Narrow', sans-serif;
     text-align: center;
     padding: 14px 16px;
+    color: white;
+}
+.home {
+    float: right;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    margin-top: 1%;
+    margin-right: 1%;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    text-decoration: none;
+    border: white solid 1px;
+    border-radius: 2px;
+} .home:hover {
+    text-decoration: none;
+    border: orangered solid 1px;
+    color: orangered;
 }
 .navbar {
     overflow: hidden;
@@ -40,7 +60,7 @@
 }
 .dropdown-content a {
     float: left;
-    color: black;
+    color: white;
     text-decoration: none;
     display: block;
     text-align: center;
@@ -50,15 +70,4 @@
 }
 .dropdown:hover .dropdown-content {
     display: block;
-}
-.home {
-    float: right;
-    font-size: 16px;  
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
 }

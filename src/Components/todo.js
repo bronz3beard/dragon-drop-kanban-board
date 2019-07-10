@@ -9,10 +9,12 @@ class ToDo extends PureComponent {
 
         return (
             <div className="task-list-wrapper">
-                <div className="todo-column" onDrop={onDrop} onDragOver={onDragOver}>
-                    <span className="todo-task-header">ToDo</span>
+                <div className="grid-task" onDrop={onDrop} onDragOver={onDragOver}>
+                    <span className="task-header">
+                        <TaskForm status="ToDo" handleTaskSubmit={handleTaskSubmit} defaultFormData={defaultFormData} />
+                        ToDo 
+                    </span>
                         {data}
-                    <TaskForm status="ToDo" handleTaskSubmit={handleTaskSubmit} defaultFormData={defaultFormData} />
                 </div>
             </div>
         );

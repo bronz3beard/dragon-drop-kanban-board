@@ -10,6 +10,7 @@
     /*border: 3px solid red;*/
 }
 .grid-item {
+    text-decoration: none;
     grid-column-start: 3;
     grid-column-end: 4;
     width: 500px;

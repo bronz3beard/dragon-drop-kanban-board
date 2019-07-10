@@ -1,0 +1,109 @@
+.add-task {
+    float: left;
+    margin-top: 1%;
+    margin-left: 2%;
+    padding: 1%;
+    border-radius: 5px;
+    border: white solid 1px;
+    background: none;
+    box-shadow: none;
+    color: white;
+    background: linear-gradient(90deg, #525150 .5%, 10%, #072d36,  #4117d8);
+}
+.add-board {
+    cursor: pointer;
+    float: right;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    margin-top: 1%;
+    margin-right: 1%;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    text-decoration: none;
+    border: white solid 1px;
+    border-radius: 2px;
+} .add-board:hover {
+    text-decoration: none;
+    border: orangered solid 1px;
+    color: orangered;
+}
+.boardForm {
+    font-size: 14px;
+    text-align: left;
+    position: relative;
+    z-index: 9;
+    margin-top: 5%;
+    display: inline-block;
+    border-radius: 2px;
+    box-shadow: -10px 10px 0px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+    color: white;
+    background: linear-gradient(180deg, #413a3a .5%, 10%, #4117d8,  transparent);
+    /*border: 5px solid;*/
+    /*border-color: rgb( 238, 100, 60 );*/
+    width: 100%;
+}
+.taskForm {
+    font-size: 14px;
+    text-align: left;
+    position: relative;
+    z-index: 9;
+    margin-top: 5%;
+    display: inline-block;
+    border-radius: 2px;
+    box-shadow: -10px 10px 0px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+    color: white;
+    background: linear-gradient(180deg, #413a3a .5%, 10%, #4117d8,  transparent);
+    /*border: 5px solid;*/
+    /*border-color: rgb( 238, 100, 60 );*/
+    width: 100%;
+}
+textarea {
+    margin-left: 5%;
+    font-size: 14px;
+    max-width: 500px;
+    max-height: 100px
+}
+input[type=text], select, textarea {
+    font-size: 14px;
+    font-family: 'PT Sans Narrow', sans-serif;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=email] {
+    font-size: 14px;
+    font-family: 'PT Sans Narrow', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=submit] {
+    font-family: 'PT Sans Narrow', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+    padding: 5px;
+    resize: vertical;
+    color: white;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: black;
+    /*background-color: #112233;*/
+}
