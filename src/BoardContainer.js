@@ -1,61 +1,83 @@
-import React, { PureComponent, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import Airtable from "airtable";
+import { withRouter } from "react-router";
 
 //Components
 import NavBar from "./Components/nav";
 import Landing from "./Components/landing";
 import BoardRoutes from "./Components/main-routes";
 
+const Airtable = require("airtable");
+
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
 const AIRTABLE_TABLE_BOARDS = process.env.REACT_APP_TABLE_BOARDS;
 
-class BoardContainer extends PureComponent {
-    state = {
-        boards: [],
-    };
-    componentDidMount() {
-        this.getAirTableBoards();
-    }
-    getAirTableBoards = () => {
-        const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
-        base(AIRTABLE_TABLE_BOARDS).select({
-            view: 'Grid view'
-        }).firstPage((err, records) => {
-            if (err) {
-                alert.error(err); 
-                return; 
-            }
-            this.setState({
-                boards: records,
-            });
-        });
-    }
-    updateAirTable = (id, status) => {
-        const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
-        base(AIRTABLE_TABLE_BOARDS).update(id, {
-            "Status": status,
-        }, function (err) {
-            if (err) {
-                alert(err);
-                return;
-            }
-        });
-    }
-    render() {
-        const { boards } = this.state;
+const BoardContainer = (props) => {
+  const [boards, setBoards] = useState([]);
+  const { location } = props;
 
-        return (
-            <Fragment>
-                <NavBar boards={boards} />
-                <Switch>
-                    <Route exact path="/boards" render={props => (<Landing {...props} boards={boards} />)} />
-                    <BoardRoutes boards={boards} />
-                </Switch>
-            </Fragment>
-        )
-    }
-}
+  useEffect(() => {
+    getAirTableBoards();
+  }, []);
 
-export default BoardContainer;
+  const getAirTableBoards = () => {
+    fetch(
+      `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_BOARDS}?api_key=${AIRTABLE_API_KEY}`
+    )
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log("BoardContainer -> data", data);
+        setBoards(data.records);
+      })
+      .catch((err) => {
+        // Error :(
+      });
+    // const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
+    // base(AIRTABLE_TABLE_BOARDS)
+    //   .select({
+    //     view: "Grid view",
+    //   })
+    //   .firstPage((err, records) => {
+    //     console.log("BoardContainer -> getAirTableBoards -> records", records);
+    //     if (err) {
+    //       console.error("BoardContainer -> getAirTableBoards -> err", err);
+    //       return;
+    //     }
+
+    //     setBoards(records);
+    //   });
+  };
+
+  const updateAirTable = (id, status) => {
+    const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
+    base(AIRTABLE_TABLE_BOARDS).update(
+      id,
+      {
+        Status: status,
+      },
+      (err) => {
+        if (err) {
+          console.error("BoardContainer -> updateAirTable -> err", err);
+          return;
+        }
+      }
+    );
+  };
+
+  return (
+    <>
+      <NavBar boards={boards} />
+      <Switch>
+        <Route
+          exact
+          path="/boards"
+          render={(props) => <Landing {...props} boards={boards} />}
+        />
+        <BoardRoutes boards={boards} />
+      </Switch>
+    </>
+  );
+};
+
+export default withRouter(BoardContainer);

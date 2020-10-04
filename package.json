@@ -1,16 +1,13 @@
 {
   "name": "dragon-drop-kanban-board",
   "version": "0.4.1",
-  "engines": {
-    "node": "10.15.3"
-  },
   "private": true,
   "dependencies": {
-    "airtable": "^0.6.0",
+    "airtable": "^0.10.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "^3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,9 +36,9 @@
     ]
   },
   "devDependencies": {
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "enzyme-to-json": "^3.3.5"
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1"
   },
   "author": {
     "name": "Rory Fairweather-Neylan",
