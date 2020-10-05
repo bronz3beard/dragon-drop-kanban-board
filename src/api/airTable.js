@@ -3,9 +3,7 @@ const Airtable = require("airtable");
 export default function handler(req, res) {
   res.status(200).json();
 }
-function timeout(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+
 export const airtableFetchRecords = async (
   config,
   filter = null,

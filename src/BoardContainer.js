@@ -6,8 +6,7 @@ import { withRouter } from "react-router";
 import NavBar from "./Components/nav";
 import Landing from "./Components/landing";
 import BoardRoutes from "./Components/main-routes";
-
-const Airtable = require("airtable");
+import Airtable from "airtable";
 
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
@@ -23,6 +22,7 @@ const BoardContainer = (props) => {
 
   const getAirTableBoards = () => {
     const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
+    console.log("getAirTableBoards -> base", base);
     base(AIRTABLE_TABLE_BOARDS)
       .select({
         view: "Grid view",
