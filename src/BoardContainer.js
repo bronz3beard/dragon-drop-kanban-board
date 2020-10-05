@@ -22,31 +22,19 @@ const BoardContainer = (props) => {
   }, []);
 
   const getAirTableBoards = () => {
-    fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_BOARDS}?api_key=${AIRTABLE_API_KEY}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log("BoardContainer -> data", data);
-        setBoards(data.records);
+    const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
+    base(AIRTABLE_TABLE_BOARDS)
+      .select({
+        view: "Grid view",
       })
-      .catch((err) => {
-        // Error :(
+      .firstPage((err, records) => {
+        console.log("BoardContainer -> getAirTableBoards -> records", records);
+        if (err) {
+          console.error("BoardContainer -> getAirTableBoards -> err", err);
+          return;
+        }
+        setBoards(records);
       });
-    // const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
-    // base(AIRTABLE_TABLE_BOARDS)
-    //   .select({
-    //     view: "Grid view",
-    //   })
-    //   .firstPage((err, records) => {
-    //     console.log("BoardContainer -> getAirTableBoards -> records", records);
-    //     if (err) {
-    //       console.error("BoardContainer -> getAirTableBoards -> err", err);
-    //       return;
-    //     }
-
-    //     setBoards(records);
-    //   });
   };
 
   const updateAirTable = (id, status) => {
