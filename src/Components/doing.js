@@ -5,12 +5,12 @@ import TaskForm from "./form-task";
 
 class Doing extends PureComponent {
   render() {
-    const { data, onDragOver, onDrop, handleTaskSubmit } = this.props;
+    const { data, onDragOver, onDrop, getAirTableTasks } = this.props;
 
     return (
       <div className="grid-task" onDrop={onDrop} onDragOver={onDragOver}>
         <span className="task-header">
-          <TaskForm status="Doing" handleTaskSubmit={handleTaskSubmit} />
+          <TaskForm status="Doing" getAirTableTasks={getAirTableTasks} />
           Doing
         </span>
         {data}

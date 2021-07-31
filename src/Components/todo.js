@@ -5,7 +5,7 @@ import TaskForm from "./form-task";
 
 class ToDo extends PureComponent {
   render() {
-    const { data, defaultFormData, onDragOver, onDrop, handleTaskSubmit } =
+    const { data, defaultFormData, onDragOver, onDrop, getAirTableTasks } =
       this.props;
 
     return (
@@ -13,7 +13,7 @@ class ToDo extends PureComponent {
         <span className="task-header">
           <TaskForm
             status="ToDo"
-            handleTaskSubmit={handleTaskSubmit}
+            getAirTableTasks={getAirTableTasks}
             defaultFormData={defaultFormData}
           />
           ToDo

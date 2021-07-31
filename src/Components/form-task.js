@@ -8,6 +8,7 @@ class TaskForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      creatingTask: false,
       formControls: {
         taskOwner: {
           value: "",
@@ -27,15 +28,20 @@ class TaskForm extends PureComponent {
 
   getUrl = () => {
     const currentURL = window.location.pathname.split("-")[1];
-    console.log("TaskForm -> getUrl -> currentURL", currentURL);
+
     return currentURL;
   };
 
   createTaskToAirTable = () => {
+    const { getAirTableTasks } = this.props;
     const { formControls } = this.state;
     const currentUrl = this.getUrl();
     const boardIdNumber = Number(currentUrl);
-    //const base = new Airtable({ apiKey: REACT_APP_API_KEY }).base('appuhJdBl6QlAoRLl');
+
+    this.setState({
+      creatingTask: true,
+    });
+
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_TASKS}`;
     const fields = {
       fields: {
@@ -55,6 +61,10 @@ class TaskForm extends PureComponent {
       body: JSON.stringify(fields),
     })
       .then(() => {
+        getAirTableTasks();
+        this.setState({
+          creatingTask: false,
+        });
         //alert("Form Sent!");
         // window.location.reload();
       })
@@ -101,9 +111,9 @@ class TaskForm extends PureComponent {
   };
 
   render() {
-    const { formControls, addTask } = this.state;
+    const { formControls, addTask, creatingTask } = this.state;
 
-    const taskForm = addTask ? (
+    const taskForm = addTask && (
       <form className="taskForm" onSubmit={this.handleSubmit}>
         <div>
           <input
@@ -123,12 +133,12 @@ class TaskForm extends PureComponent {
         />
         <input className="button-submit" type="submit" value="Post" />
       </form>
-    ) : null;
+    );
 
     return (
       <React.Fragment>
         <button className="add-task" onClick={this.handleAddTask}>
-          Add Task
+          {!creatingTask ? "Add Task  " : "Creating Task..."}
         </button>
         {taskForm}
       </React.Fragment>
