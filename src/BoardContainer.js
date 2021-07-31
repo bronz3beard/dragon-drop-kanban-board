@@ -28,7 +28,6 @@ const BoardContainer = (props) => {
         view: "Grid view",
       })
       .firstPage((err, records) => {
-        console.log("BoardContainer -> getAirTableBoards -> records", records);
         if (err) {
           console.error("BoardContainer -> getAirTableBoards -> err", err);
           return;

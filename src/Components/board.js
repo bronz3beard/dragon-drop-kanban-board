@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
+import { airtableFetchRecords } from "../api/airTable";
 import { Link } from "react-router-dom";
 import Airtable from "airtable";
 
@@ -9,7 +10,7 @@ import Complete from "./complete";
 
 const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
 const AIRTABLE_BASE = process.env.REACT_APP_BASE;
-const AIRTABLE_TABLE_TASKS = process.env.REACT_APP_TABLE_TASKS;
+const AIRTABLE_TABLE_TASKS = process.env.REACT_APP_TABLE_BOARDS;
 
 class Board extends PureComponent {
   state = {
@@ -20,33 +21,12 @@ class Board extends PureComponent {
     this.getAirTableTasks();
   }
 
-  getAirTableTasks = () => {
-    fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE_TASKS}?api_key=${AIRTABLE_API_KEY}`
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log("BoardContainer -> data", data);
-        this.setState({
-          boardData: data.records,
-        });
-      })
-      .catch((err) => {
-        // Error :(
-      });
-    // const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE);
-    // base(AIRTABLE_TABLE_TASKS)
-    //   .select({
-    //     view: "Grid view",
-    //   })
-    //   .firstPage((err, records) => {
-    //     if (err) {
-    //       console.error("Board -> getAirTableTasks -> err", err);
-    //     }
-    //     this.setState({
-    //       boardData: records,
-    //     });
-    //   });
+  getAirTableTasks = async () => {
+    const records = await airtableFetchRecords();
+
+    this.setState({
+      boardData: records,
+    });
   };
 
   updateAirTable = (id, status) => {
@@ -132,9 +112,6 @@ class Board extends PureComponent {
 
     return (
       <Fragment>
-        <Link to="/boards" className="home">
-          home
-        </Link>
         <div className="container">
           <ToDo
             data={taskStatusList.ToDo}

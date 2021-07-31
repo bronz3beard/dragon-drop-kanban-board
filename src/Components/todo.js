@@ -4,21 +4,24 @@ import React, { PureComponent } from "react";
 import TaskForm from "./form-task";
 
 class ToDo extends PureComponent {
-    render() {
-        const { data, defaultFormData, onDragOver, onDrop, handleTaskSubmit } = this.props;
+  render() {
+    const { data, defaultFormData, onDragOver, onDrop, handleTaskSubmit } =
+      this.props;
 
-        return (
-            <div className="task-list-wrapper">
-                <div className="grid-task" onDrop={onDrop} onDragOver={onDragOver}>
-                    <span className="task-header">
-                        <TaskForm status="ToDo" handleTaskSubmit={handleTaskSubmit} defaultFormData={defaultFormData} />
-                        ToDo 
-                    </span>
-                        {data}
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div className="grid-task" onDrop={onDrop} onDragOver={onDragOver}>
+        <span className="task-header">
+          <TaskForm
+            status="ToDo"
+            handleTaskSubmit={handleTaskSubmit}
+            defaultFormData={defaultFormData}
+          />
+          ToDo
+        </span>
+        {data}
+      </div>
+    );
+  }
 }
 
 export default ToDo;

@@ -1,35 +1,32 @@
 const Airtable = require("airtable");
 
+const AIRTABLE_API_KEY = process.env.REACT_APP_API_KEY;
+const AIRTABLE_BASE = process.env.REACT_APP_BASE;
+const AIRTABLE_TABLE = process.env.REACT_APP_TABLE_TASKS;
+
 export default function handler(req, res) {
   res.status(200).json();
 }
 
-export const airtableFetchRecords = async (
-  config,
-  filter = null,
-  fields = null
-) => {
+export const airtableFetchRecords = async () => {
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
-    apiKey: process.env.REACT_APP_API_KEY,
+    apiKey: AIRTABLE_API_KEY,
   });
-  const base = Airtable.base(config.baseName);
+  const base = Airtable.base(AIRTABLE_BASE);
   const options = [];
   const query = {
-    maxRecords: 3,
-    view: config.gridView,
+    maxRecords: 1000,
+    gridView: "Main View",
   };
 
-  if (filter) query.filterByFormula = filter;
-  if (fields) query.fields = fields;
-
   return new Promise((resolve, reject) => {
-    base(config.table)
+    base(AIRTABLE_TABLE)
       .select(query)
       .eachPage(
         (records, fetchNextPage) => {
           records.forEach((record) => {
-            options.push(config.recordBuilder(record));
+            options.push(record);
           });
           fetchNextPage();
         },
